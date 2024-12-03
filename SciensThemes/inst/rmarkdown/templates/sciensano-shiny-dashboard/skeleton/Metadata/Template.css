@@ -1,0 +1,95 @@
+.section.sidebar {
+
+  background-color:#e1eed9;
+  color: $white;
+
+}
+
+.navbar, [data-toggle=tab], .navbar-brand  {}
+
+.navbar-logo img {
+    position: absolute;
+    right: 50px;
+    width: 120px;
+    height: auto;
+}
+
+body {
+  background-color: #FDF7F7;
+  color: #15220d;
+  font-family: 'Prompt', sans-serif;
+}
+
+.navbar {
+  background-color: #69aa41;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Sen', sans-serif;
+}
+
+pre, code {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+a {
+  color: #69aa41;
+}
+
+
+.navbar-inverse .navbar-nav>.active > a, .navbar-inverse .navbar-nav>.active > a:hover, .navbar-inverse .navbar-nav>.active > a:focus {
+  color: #004724;
+  background-color: #bccf00;     /* active tab */
+}
+.navbar-inverse .navbar-nav>li > a:hover, .navbar-inverse .navbar-nav > li > a:focus {
+  color:  #004724;
+  background-color: #bccf00;     /* inactive tab on hover/focus */
+}
+
+
+.chart-title {
+    color: #69aa41;
+    font-size: 20px;
+}
+
+.Sciensano-button {
+  color:  #004724;
+  background-color: #bccf00;
+  border-color: #bccf00;
+  border-radius: 10px;
+  border-width: 2px;
+  display: block;
+  margin: 0 auto;
+}
+
+.Sciensano-button:hover {
+  background-color: #004724;
+  color: #bccf00;
+  border-color: #004724;
+}
+
+
+.value-box .value {
+    color: white;
+}
+
+.value-box .caption {
+    color: white;
+}
+
+.value-box-primary {
+    background-color: #69aa41; /* Primary background color */
+    border-color:#69aa41;
+}
+
+.value-box-success {
+    background-color: #69aa41; /* Success background color */
+}
+.value-box-warning {
+    background-color: #fad500; /* Warning background color */
+}
+.value-box-danger {
+    background-color: #dc3545; /* Danger background color */
+}
+
+

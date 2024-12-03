@@ -1,0 +1,95 @@
+---
+output: word_document
+---
+<br />
+
+<br />
+
+<br />
+
+<br />
+
+<br />
+
+<br />
+
+<br />
+
+<br />
+
+<br />
+
+<br />
+
+<br />
+
+###### `r params$title`
+
+------
+
+<br />
+
+<br />
+
+<br />
+
+<br />
+
+<br />
+
+<br />
+
+<br />
+
+<br />
+
+<br />
+
+<br />
+
+<br />
+
+<br />
+
+<br />
+
+<br />
+
+<br />
+
+<br />
+
+<br />
+
+Authors: `r params$author`
+
+`r Sys.Date()`
+
+\newpage
+
+```{r echo=FALSE, message=FALSE, warning=FALSE,results='asis'}
+if (params$TOC=="T") {
+  cat("## Table of Contents\n\n")
+  cat("<!---BLOCK_TOC--->\n\n")
+  cat("\\newpage\n\n")
+}
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE,results='asis'}
+if (params$LOFig=="T" & params$LOTab=="T") {
+  cat("## List of figures\n\n")
+  cat("<!---BLOCK_TOC{seq_id: 'Figure'}--->\n\n")
+  cat("## List of tables\n\n")
+  cat("<!---BLOCK_TOC{seq_id: 'table'}--->\n\n")
+  cat("\\newpage\n\n")
+}else if (params$LOFig=="T" & params$LOTab=="F") {
+  cat("## List of figures\n\n")
+  cat("<!---BLOCK_TOC{seq_id: 'Figure'}--->\n\n")
+  cat("\\newpage\n\n")
+}else if(params$LOFig=="F" & params$LOTab=="T") {
+  cat("## List of tables\n\n")
+  cat("<!---BLOCK_TOC{seq_id: 'table'}--->\n\n")
+  cat("\\newpage\n\n")
+  }
+```
+

@@ -1,0 +1,4 @@
+name: Sciensano Shiny dashboard
+description: >
+   An interactive shiny dashboard using flexdashboard
+create_dir: FALSE

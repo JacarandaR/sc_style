@@ -1,0 +1,123 @@
+---
+params:
+  title: "Insert your title"
+  author: "Author's names"
+  TOC: T
+  LOFig: T
+  LOTab: T
+title: |
+  ![](Meta_data/SciensanoLOGO.jpg)
+output:
+  officedown::rdocx_document:
+    number_sections: F
+    reference_docx: Meta_data/Ref.docx
+---
+```{r, child='Meta_data/DoNotDeleteThis.Rmd'}
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = FALSE,
+	message = FALSE,
+	warning = FALSE,
+	fig.retina = 4,
+	fig.lp= "Figure",
+	fig.asp=0.9,
+	fig.width=5)
+```
+
+```{r, include=FALSE}
+library(dplyr)
+library(ggplot2)
+library(SciensThemes)
+```
+
+# A Sciensano RMarkdown Template
+
+## Features
+
+Here is an overview of what this template can provide.
+
+### Exemple of table
+
+```{r}
+#| tab.id: Table_1_id
+#| tab.cap: Name of Table 1
+#| tab.lp: table
+mtcars%>%
+  head()%>%
+  sciensano_table(autofit=T)
+```
+
+<br />
+
+Here is a reference to **Table** \@ref(tab:Table_1_id)
+
+Here is some text that has a foot note[^1].
+
+[^1]: This is the footnote.
+
+### Example of a map
+
+```{r, include=FALSE}
+library("spData")
+library("sf")
+sids <- st_read(dsn = system.file("shapes/sids.shp", package = "spData"), crs = 4326 )
+```
+
+```{r map_id, fig.cap= "Example of a map"}
+
+map_plot<-ggplot(sids)+
+    geom_sf(aes(fill = SID74))+
+    geom_sf(fill = "transparent",color = "grey85")
+  
+map_plot%>%sciensano_plot()
+```
+
+
+<!---BLOCK_LANDSCAPE_START--->
+
+### Landscape section
+
+```{r}
+#| tab.id: Table_2_id
+#| tab.cap: Name of Table 2
+#| tab.lp: table
+
+head(mtcars,14)%>%
+  cbind(head(diamonds,14))%>%
+  sciensano_table(autofit=T)
+
+```
+
+<!---BLOCK_LANDSCAPE_STOP--->
+
+### Other type of plots
+
+```{r Plot_2_id,fig.cap= "Name of plot 2"}
+mtcars$cyl<-as.factor(mtcars$cyl)
+
+plot2<-mtcars%>%
+  ggplot()+
+  aes(disp, fill=cyl, color=cyl)+
+  geom_density(alpha=0.2, width=10)+
+  labs(title ="Visualisation of the mtcars dataset")+
+  facet_wrap(~am)
+
+plot2%>%
+  sciensano_plot()
+```
+
+Here is a reference to **Figure** \@ref(fig:Plot_2_id)
+
+```{r Plot_3_id,fig.cap= "Name of plot 3"}
+plotdiamonds<-diamonds%>%
+  ggplot()+
+  aes(carat,price , color=clarity)+
+  geom_point(alpha=0.2, width=10)+
+  labs(title ="Visualisation of the diamond dataset")+
+  geom_smooth(method = lm)
+
+plotdiamonds%>%
+  sciensano_plot()
+```

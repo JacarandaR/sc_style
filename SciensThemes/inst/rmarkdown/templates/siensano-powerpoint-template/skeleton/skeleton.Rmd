@@ -1,0 +1,200 @@
+---
+date: "`r Sys.Date()`"
+author: "Your Name"
+title: "Untitled"
+output: 
+  officedown::rpptx_document:
+    reference_doc: "Metadata/pptTemp.pptx"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = FALSE,
+	message = FALSE,
+	warning = FALSE
+)
+library(officedown)
+library(ggplot2)
+library(rvg)
+library(dplyr)
+library(SciensThemes)
+```
+
+# Columns and lists
+
+::: columns
+::: column
+## Numbered list
+
+1.  This is the fist element of the list;
+
+2.  Here is the second
+
+3.  The third element of the list
+
+4.  The fourth\*
+
+5.  This is the last element of this list
+:::
+
+::: column
+## Doted list
+
+-   This is the fist element of the list;
+
+-   Here is the second
+
+-   The third element of the list
+
+-   The fourth
+
+-   This is the last element of this list
+:::
+:::
+
+# Table
+
+::: columns
+::: column
+```{r layout='Two Content', ph=officer::ph_location_left()}
+head(cars)%>%sciensano_table()
+```
+:::
+
+::: column
+## subtitle
+
+-   Some
+-   Bullets
+:::
+:::
+
+::: notes
+Note HERE
+:::
+
+# Table
+
+```{r echo=FALSE}
+head(iris)%>% 
+  sciensano_table()
+```
+
+# ggplot in right column
+
+::: columns
+::: column
+```{r layout='Two Content', ph=officer::ph_location_left()}
+head(iris)%>%sciensano_table()
+```
+:::
+
+::: column
+-   point 1
+
+-   $\left( \sum_{i=1}^{n}{i} \right)^2 = \left( \frac{n(n-1)}{2}\right)^2 = \frac{n^2(n-1)^2}{4}$
+
+-   Bullets Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+:::
+:::
+
+# Insert pictures
+::: columns
+::: column
+
+![](https://braintower.com/wp-content/uploads/2020/12/Sciensano-800x500-1.jpg)
+:::
+::: column
+## A comment
+-  Lorem ipsum dolor sit amet, 
+-  consectetur adipiscing elit
+
+## Another comment
+-  Lorem ipsum dolor sit amet, 
+-  consectetur adipiscing elit
+
+
+:::
+:::
+
+# graph
+
+(1) point one
+
+(2) point two
+
+```{r ph=officer::ph_location_right()}
+mygg <- ggplot(pressure, aes(x = temperature, y = pressure)) +
+  geom_point()
+mygg<-mygg %>%sciensano_plot()
+dml(ggobj = mygg)
+```
+
+# ggplot in right column
+
+```{r}
+mygg %>%sciensano_plot()
+```
+
+# A column layout
+
+## A comment
+-  Lorem ipsum dolor sit amet, 
+-  consectetur adipiscing elit
+
+## Another comment
+-  Lorem ipsum dolor sit amet, 
+-  consectetur adipiscing elit
+
+
+```{r, fig.retina=4}
+library(patchwork)
+mtcars$cyl<-as.factor(mtcars$cyl)
+
+plot1<-mtcars%>%
+  ggplot()+
+  aes(disp, fill=cyl, color=cyl)+
+  geom_density(alpha=0.2, width=10)+
+  facet_wrap(~am)
+
+P1<-plot1%>%
+  sciensano_plot()
+
+mtcars$cyl<-as.factor(mtcars$cyl)
+
+plot2<-mtcars%>%
+  ggplot()+
+  aes(disp, fill=cyl, color=cyl)+
+  geom_density(alpha=0.2, width=10)+
+  facet_wrap(~cyl)
+
+P2<-plot2%>%
+  sciensano_plot()
+
+ mygg
+
+```
+
+
+# Slide with ggplot
+
+```{r ph=officer::ph_location(left = 0.5, top = 1.1, width = 9, height = 3.9)}
+
+dml(ggobj = P2)
+```
+
+# Clarity
+
+```{r ph=officer::ph_location(left = 0.5, top = 1.1, width = 9, height = 3.9)}
+plotdiamonds<-diamonds%>%
+  ggplot()+
+  aes(carat,price , color=clarity)+
+  #geom_point(alpha=0.2)+
+  geom_smooth()+
+  facet_wrap(~clarity, ncol=4)
+
+P2<-plotdiamonds%>%
+  sciensano_plot()
+
+dml(ggobj = P2)
+```

@@ -1,0 +1,410 @@
+---
+title: "Sciensano Presentation"
+subtitle: "Subtitle"
+author: "Presentator name"
+date: "`r Sys.Date()`"
+output:
+  xaringan::moon_reader:
+      css: Metadata/default_CUST.css
+      includes:
+        after_body: Metadata/insert-logo.html
+      nature:
+          highlightLines: true
+---
+
+```{r , include=FALSE, warning=FALSE}
+library(SciensThemes)
+library(dplyr)
+library(ggplot2)
+library(fontawesome)
+library(xaringanExtra)
+```
+
+```{r share-again, echo=FALSE}
+xaringanExtra::use_share_again()
+xaringanExtra::use_fit_screen()
+xaringanExtra::use_scribble()
+
+```
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+class: center, middle
+
+```{r include=FALSE}
+style_banner(text_color = "#3aaa35",
+  background_color = "white",
+  height="4em",
+  selector = ".inverse")
+```
+
+# A Sciensano Template
+
+### Presentation using `xaringan`
+
+<br><br><br>
+
+For more information about `xaringan` see [this reference](https://bookdown.org/yihui/rmarkdown/xaringan.html)
+
+
+---
+class: inverse, middle, center
+
+# Some features...
+
+----
+
+---
+class: center, inverse
+
+background-image: url("https://braintower.com/wp-content/uploads/2020/12/Sciensano-800x500-1.jpg")
+
+# Insert a background
+
+
+---
+
+.left-column[ 
+
+### Here is the left sidebar
+
+]
+
+.right-column[
+
+# Sidebar layout
+
+----
+
+### Here is the right sidebar
+
+`.left-column[ ]` and `.right-column[ ]` provide a sidebar layout. The left sidebar is narrow (20% of the slide width), and the right column is the main column (75% of the slide width).
+
+
+]
+
+---
+
+```{r xaringan-panelset, echo=FALSE}
+xaringanExtra::use_panelset()
+```
+
+# Tabs
+
+.panelset[
+.panel[.panel-name[Quotes]
+
+### Quotes
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.
+
+> Here is a quote ! To insert a quote start your sentance by "`>`"
+]
+
+.panel[.panel-name[Horizontal lines]
+
+### horizontal lines
+
+To insert an horizontal line type "----"
+
+----
+
+]
+
+.panel[.panel-name[Two columns]
+
+### Two columns
+
+use `.pull-right[]` and `.pull-left[]` to create two aqually sized columns
+
+.pull-left[
+**Left column** 
+<br>
+The content of the left column.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.
+]
+
+.pull-right[
+**Right column** 
+<br>
+The content of the right column.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.
+]
+
+]
+]
+
+
+
+---
+
+# Listing
+
+--
+
+.pull-left[
+
+### List type 1
+
+1. This is the fist element of the list;
+
+1. Here is the second
+
+1. The third element of the list
+
+1. The fourth*
+
+1. This is the last element of this list
+
+.footnote[[*] The number four !]
+
+]
+--
+.pull-right[
+
+### List type 2
+
+- This is the fist element of the list;
+
+- Here is the second
+
+- The third element of the list
+
+- The fourth
+
+- This is the last element of this list
+]
+
+
+---
+
+# Math Expressions
+
+You can write LaTeX math expressions inside a pair of dollar signs, e.g. &#36;\alpha+\beta$ renders $\alpha+\beta$. You can use the display style with double dollar signs:
+
+```
+$$\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i$$
+```
+
+$$\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i$$
+
+---
+
+# `r fa("lightbulb")` font-Awesome icons
+
+```{r message=FALSE, warning=FALSE}
+library(fontawesome)
+```
+
+## `r fa("check")` Here is some examples:
+
+<br>
+
+.center[
+`r fa("vial",fill="grey",height="4em")` 
+`r fa("virus",fill="grey",height="4em")` 
+`r fa("microscope",fill="grey",height="4em")`
+]
+
+<br><br><br>
+
+See this website for more icons `r fa("arrow-right")`  [`r fa("globe")`](https://fontawesome.com/)
+
+---
+
+# R Code
+
+You can use code
+```{r comment='#'}
+# a boring regression
+fit = lm(dist ~ 1 +speed, data = cars)
+```
+--
+
+Highlight code using in front of the line `#<<`
+
+```{r,tidy=FALSE, eval=FALSE}
+fit = lm(dist ~ 1 + speed, data = cars)
+coef(summary(fit))  #<<
+```
+
+--
+
+... and highlight outputs with `highlight.output=c(1,3)` (for example) specification inside the chunk 
+
+```{r, highlight.output=c(1,3)}
+coef(summary(fit))
+```
+
+---
+
+# R Plots
+
+```{r cars, fig.height=3, dev='svg'}
+ggplt<-mtcars%>%
+  ggplot()+
+  aes(cyl, mpg, color=am)+
+  geom_point()
+
+ggplt%>%sciensano_plot()
+```
+
+---
+### Visualtisation of the `mtcars` dataset
+
+```{r echo=FALSE, message=FALSE, warning=FALSE,out.width='100%',fig.asp=2/3,fig.retina=4}
+library(plotly)
+library(ggplot2)
+library(SciensThemes)
+
+mtcars$cyl<-as.factor(mtcars$cyl)
+
+plot2<-mtcars%>%
+  ggplot()+
+  aes(disp, fill=cyl, color=cyl)+
+  geom_density(alpha=0.2, width=10)+
+  facet_wrap(~am)
+
+pl<-plot2%>%
+  sciensano_plot(ColourPal = c("#006633","#3aaa35", "#bccf00"))
+
+pl
+
+```
+
+---
+class: center, middle, inverse
+
+### Plot of mtcars
+
+
+```{r echo=FALSE, message=FALSE, warning=FALSE,fig.retina=4,out.width='90%',fig.asp=2/3}
+mtcars$cyl<-as.factor(mtcars$cyl)
+
+plot2<-mtcars%>%
+  ggplot()+
+  aes(disp)+
+  geom_density(alpha=0.2, width=10, color="white", fill="white")+
+  facet_wrap(~am)
+
+plot2%>%sciensano_plot(Inverse = T)
+```
+
+---
+
+# Tables
+.pull-left[
+```{r}
+head(iris[1:2], 2)%>%
+  sciensano_table()
+```
+]
+
+.pull-right[
+
+<br><br><br><br>
+
+`r fa("arrow-right")` a table using `sciensano_table()`
+]
+
+--
+
+```{r}
+head(iris, 2)%>%
+  sciensano_table(autofit=T)
+```
+
+---
+
+# Reactable
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+
+library(reactable)
+sciensano_theme <- reactableTheme(
+  header = list(background = "#3aaa35", color = "white"))
+
+reactable(
+  mtcars[1:5],
+  defaultPageSize = 7,
+  highlight = TRUE,
+  striped = TRUE,
+  bordered = TRUE,
+  theme = sciensano_theme,
+  searchable = TRUE)
+```
+
+---
+# Maps
+
+```{r fig.height=6, message=FALSE, warning=FALSE, out.width='100%'}
+library(leaflet)
+leaflet() %>% addTiles() %>% setView(-93.65, 42.0285, zoom = 17)
+```
+
+---
+class: center, middle
+
+```{r message=FALSE, warning=FALSE, include=FALSE}
+library(spData)
+library(sf)
+```
+
+```{r include=FALSE}
+sids <- st_read(dsn = system.file("shapes/sids.shp",
+                                  package = "spData"), crs = 4326 )
+```
+
+```{r, include=FALSE}
+map_plot<-ggplot(sids)+
+    geom_sf(aes(fill = SID74))+
+    geom_sf(fill = "transparent",color = "grey85")
+```
+
+```{r, echo=FALSE, out.width="100%", fig.retina=4}
+map_plot%>%sciensano_plot()
+```
+
+---
+
+### Comments and presenter mode 
+
+You can write notes for yourself to read in the presenter mode (press the keyboard shortcut **p**). These notes are written under three question marks ??? after a slide
+
+![](Metadata/presentermode.jpg)
+
+???
+
+With "???" you can add hidden comments
+
+# A section in comment
+
+- Comment 1 - **Important !**
+- Comment 2
+
+# Another section in comment
+
+- Comment 3
+- Comment 4
+
+---
+
+class: center, middle, inverse
+
+# Thanks!
+
+```{r xaringanExtra-freezeframe, echo=FALSE}
+xaringanExtra::use_banner(
+  bottom_left = "",
+  top_right = ""
+)
+
+```
+
+```{r echo=FALSE}
+style_banner(text_color = "#3aaa35",
+  background_color = "white",
+  height="4em",
+  selector = ".inverse")
+```
+

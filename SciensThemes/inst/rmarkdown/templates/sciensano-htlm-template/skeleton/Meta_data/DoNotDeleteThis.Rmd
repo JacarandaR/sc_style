@@ -1,0 +1,20 @@
+---
+output: html_document
+---
+```{r,results='asis', echo=FALSE}
+cat("```{=html}
+<body><header style=\"background-color: #3aaa35; color: white; padding: 8px; margin-top: 5px;width: 100%;\"><head1>",
+params$title,
+"</head1><p>",
+params$subtitle,"</p><p style='text-align: right;'>",
+as.character(Sys.Date()),
+"</p></header></body>
+```")
+```
+
+```{r include_html, echo=FALSE, message=FALSE, warning=FALSE}
+library(shiny)
+includeHTML("HTML_Template.html")
+```
+
+

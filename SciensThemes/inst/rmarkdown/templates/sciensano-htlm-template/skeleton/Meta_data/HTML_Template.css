@@ -1,0 +1,48 @@
+body{
+  font-size: 10pt;
+}
+h1.title{
+  color:  #3aaa35;
+  font-size: 25pt;
+}
+h1{
+  color:  #3aaa35;
+  font-size: 17pt;
+}
+h2{
+  color:  #bccf00;
+  font-size: 14pt;
+}
+h3{
+  color:  #3aaa35;
+  font-size: 12pt;
+}
+h4{
+  font-size: 11pt;
+}
+head1{
+  color:  white;
+  font-size: 28pt;
+}
+
+
+
+#TOC {
+  margin-top: 95px;
+  color: #363636;
+}
+
+
+
+#TOC:before {
+  content: '';
+  display: block;
+  width: 210px;
+  height: 64px; /* Adjust height as needed */
+  background-image: url('sciensano_logo.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: fixed;
+  margin-top: -80px;
+  z-index: 1000; /* Ensure it's above other content */
+}

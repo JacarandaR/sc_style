@@ -1,0 +1,82 @@
+<style>
+/* CSS for the first logo */
+.logo {
+  background-image: url(SciensanoLOGO.jpg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 0.5em;
+  right: 1em;
+  width: 120px;
+  height: 128px;
+  z-index: 0;
+}
+
+/* CSS for the second logo */
+.second-logo {
+  background-image: url(logo2.PNG);
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 0em;
+  right: 1em;
+  width: 110px;
+  height: 128px;
+  z-index: 0;
+}
+
+
+/* CSS for the second logo */
+.begreen-logo {
+  background-image: url(be_green.JPG);
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  bottom: 0em;
+  right: 1em;
+  width: 40px;
+  height: 40px;
+  z-index: 0;
+}
+
+.beblack-logo {
+  background-image: url(be_black.JPG);
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  bottom: 0em;
+  right: 1em;
+  width: 50px;
+  height: 50px;
+  z-index: 0;
+}
+</style>
+
+<script>
+document
+  .querySelectorAll(
+    '.remark-slide-content' +
+    ':not(.title-slide)' +
+    // add additional classes to exclude here, e.g.
+    ':not(.inverse)' +
+    ':not(.hide-logo)'
+  )
+  .forEach(el => {
+    el.innerHTML += '<div class="logo"></div>';
+     el.innerHTML += '<div class="beblack-logo"></div>';
+  });
+
+document
+  .querySelectorAll(
+    '.remark-slide-content' +
+    //':not(.title-slide)' +
+    ':not(.hide-logo)'+
+    '.inverse'
+  )
+  .forEach(el => {
+    el.innerHTML += '<div class="logo"></div>';
+    el.innerHTML += '<div class="beblack-logo"></div>';// Add this line to add the second logo
+  });
+</script>
+
+

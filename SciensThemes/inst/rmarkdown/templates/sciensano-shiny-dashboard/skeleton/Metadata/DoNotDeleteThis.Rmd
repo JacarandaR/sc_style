@@ -1,0 +1,45 @@
+---
+output: flex_dashboard
+---
+
+```{=html}
+<style>
+.navbar, [data-toggle=tab], .navbar-brand  {}
+
+.navbar-logo img {
+    position: absolute;
+    right: 50px;
+    width: 130px;
+    height: auto; 
+}
+
+.section.sidebar {
+  background-color:#e1eed9;
+  color: $white;
+}
+
+.chart-title {
+    color: #69aa41;
+    font-size: 20px;
+}
+
+
+.value-box-primary {
+    background-color: #69aa41; /* Primary background color */
+    border-color:#69aa41;
+}
+
+.value-box-success {
+    background-color: #69aa41; /* Success background color */
+}
+.value-box-warning {
+    background-color: #fad500; /* Warning background color */
+}
+.value-box-danger {
+    background-color: #dc3545; /* Danger background color */
+}
+
+
+</style>
+```
+

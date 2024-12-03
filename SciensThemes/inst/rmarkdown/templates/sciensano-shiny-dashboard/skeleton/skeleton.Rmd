@@ -1,0 +1,194 @@
+---
+title: "Sciensano Dashboard"
+output:
+  flexdashboard::flex_dashboard:
+    theme:
+      version: 4
+      bg: "#fafafa" 
+      fg: "#242826"
+      primary: "#69aa41"
+      navbar-bg: "#bccf00"
+    navbar:
+      - { title: "Info",
+       href: "https://www.sciensano.be/en", align: left }
+      - { icon: "fa-question-circle",
+       href: "https://www.sciensano.be/en", align: right }
+    logo: Metadata/logo2.png
+runtime: shiny
+---
+```{r, child='Metadata/DoNotDeleteThis.Rmd'}
+```
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(ggplot2)
+library(SciensThemes)
+library(dplyr)
+library(reactable)
+library(shinyWidgets)
+```
+
+# Page 1 {data-navmenu="Menu"}
+
+## Column {data-width="550"}
+
+### 
+
+```{r}
+
+sciensano_theme <- reactableTheme(
+  header = list(background = "#69aa41", color = "white"))
+
+reactable(
+  mtcars[1:4],
+  defaultPageSize = 14,
+  highlight = TRUE,
+  striped = TRUE,
+  bordered = TRUE,
+  theme = sciensano_theme,
+  searchable = TRUE)
+```
+
+## Column {data-width="450"}
+
+### Chart B
+
+```{r}
+mtcars$cyl<-as.factor(mtcars$cyl)
+
+plot2<-mtcars%>%
+  ggplot()+
+  aes(disp, fill=cyl, color=cyl)+
+  geom_density(alpha=0.2, width=10)+
+  labs(title ="Visualisation of the mtcars dataset")+
+  facet_wrap(~am)
+
+plot2%>%
+  sciensano_plot(ColourPal = c("#006633","#69aa41", "#bccf00"))
+```
+
+# Page 2 {data-navmenu="Menu"}
+
+
+## Column {data-width="150"}
+
+### Box 1
+
+```{r}
+valueBox(30, icon = "fa-comments")
+```
+
+### Box 2
+
+```{r}
+val = 11
+valueBox(val, icon = "fa-trash",
+  color = ifelse(val > 10, "warning", "primary")
+)
+```
+
+### Gauge
+
+```{r}
+gauge(45, min = 0, max = 50, gaugeSectors(
+  success = c(41, 50), warning = c(21, 40), danger = c(0, 20)
+))
+```
+
+## Column
+
+### Chart C
+
+texte here
+
+```{r}
+
+```
+
+### Chart d
+
+```{r}
+
+```
+
+### Chart e
+
+```{r}
+
+```
+
+# Page 3 {data-icon="fa-globe"}
+
+```{r global, include=FALSE}
+library(datasets)
+data(faithful)
+```
+
+## Column {.sidebar}
+
+the mtcars dataset
+
+```{r}
+selectInput("x", label = "x",
+            choices =names(mtcars), selected = "cyl")
+selectInput("y", label = "y",
+            choices =names(mtcars), selected = "mpg")
+
+selectInput("col", label = "Number of bins:",
+            choices =names(mtcars), selected = "qsec")
+
+actionButton("button", "Click here",icon("paper-plane"),class = "Sciensano-button")
+```
+
+<br>
+
+```{r}
+sliderInput("slider","1 slider input",min = 0, max=10, value=5)
+```
+
+## Column
+
+### **The mtcars dataset visualisation**
+
+```{r}
+renderPlot({
+  mtcars$cyl<-as.factor(mtcars$cyl)
+  mtcars$am<-as.factor(mtcars$am)
+  mtcars$vs<-as.factor(mtcars$vs)
+   mtcars$gear<-as.factor(mtcars$gear)
+ plot <-mtcars%>%
+    ggplot()+
+    aes_string(input$x , input$y , color=input$col )+
+   geom_point(size=3)+
+   facet_grid(vars(cyl))
+
+ 
+ plot%>%sciensano_plot(ColourPal = c("#006633","#69aa41", "#bccf00"))
+})
+```
+
+
+# page 4 {data-icon="fa-chart-line"}
+
+## Column 
+
+### Chart
+
+## Column
+
+### Chart
+
+
+# {data-icon="fa-chart-simple"}
+
+## Column {.tabset .tabset-fade data-width=600}
+
+### Chart 1
+### Chart 2
+### Chart 3
+### Chart 4
+
+## Column
+
+### Chart 
+### Chart

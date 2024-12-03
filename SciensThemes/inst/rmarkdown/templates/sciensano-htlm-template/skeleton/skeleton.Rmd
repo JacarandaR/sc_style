@@ -1,0 +1,113 @@
+---
+params:
+  title: "Insert Title here"
+  subtitle: "Insert here subtitle"
+output:
+  bookdown::html_document2:
+    toc: yes
+    toc_depth: 2
+    toc_float: 
+      collapsed: false
+      smooth_scroll: false
+    number_sections: yes
+    df_print: paged
+    theme: 
+      bg: "#ffffff"
+      fg: "#363636" 
+      primary: "#efefef"
+      navbar-bg: "#a5a5a5"
+---
+
+```{r, child='Meta_data/DoNotDeleteThis.Rmd'}
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = FALSE,
+	message = FALSE,
+	warning = FALSE,
+	fig.align = 'center')
+```
+
+```{r}
+library(SciensThemes)
+library(dplyr)
+library(flextable)
+library(ggplot2)
+library(spData)
+library(sf)
+```
+
+
+# An RMarkdown Template
+
+This file is an example of what you can get with this template. Make sure that you update the all fields to your convenience. You can use built in function from the `SciensThemes` package like `sciensano_plot()` or `sciensano_table()` to have a Sciensano style to your outputs, see table \@ref(tab:table1id) or figure \@ref(fig:fig1id), \@ref(fig:fig2id) and figure \@ref(fig:fig3id)
+
+
+```{=html}
+<div class="alert alert-success" role="alert">
+
+This is a note in green ! Switch "alert-success" to "alert-warning" for yellow and "alert-danger" for red
+
+</div>
+```
+
+**Some equation** `r fontawesome::fa('lightbulb')`
+
+$\left( \sum_{i=1}^{n}{i} \right)^2 = \left( \frac{n(n-1)}{2}\right)^2 = \frac{n^2(n-1)^2}{4}$
+
+## Features
+
+This section provides some example of table and plots that you can make with the `SciensThemes` package
+
+### Table
+
+```{r table1id, tab.cap="Title of the table"}
+head(mtcars, 30)%>%
+  sciensano_table()
+```
+
+### Figures
+
+```{r fig1id, fig.cap = "Title of graphic"}
+
+mtcars$cyl<-as.factor(mtcars$cyl)
+
+plot2<-mtcars%>%
+  ggplot()+
+  aes(disp, fill=cyl, color=cyl)+
+  geom_density(alpha=0.2, width=10)+
+  facet_wrap(~am)
+
+plot2%>%
+  sciensano_plot()
+
+```
+
+```{r fig2id, fig.cap = "The diamonds dataset"}
+
+plotdiamonds<-diamonds%>%
+  ggplot()+
+  aes(carat,price , color=clarity)+
+  geom_point(alpha=0.2, width=10)+
+  geom_smooth(method = lm)
+
+plotdiamonds%>%
+  sciensano_plot()
+```
+
+```{r include=FALSE}
+sids <- st_read(dsn = system.file("shapes/sids.shp",
+                                  package = "spData"), crs = 4326 )
+```
+
+```{r fig3id, fig.cap = "Exemple of a map"}
+
+map_plot<-ggplot(sids)+
+    geom_sf(aes(fill = SID74))+
+    geom_sf(fill = "transparent",color = "grey85")
+  
+map_plot%>%sciensano_plot()
+```
+
+
