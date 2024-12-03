@@ -144,7 +144,8 @@ shinyApp(
                   selected = "Tab3",
                   tabPanel("Tab1", "Content for Tab One"),
                   tabPanel("Tab2", "Content for Tab Two"),
-                  tabPanel("Tab3", "Content for Third Tab")
+                  tabPanel("Tab3", "Content for Third Tab"),
+                  tabPanel("Tab4", "Content for four Tab")
                 )
               ),
               tabPanel(title = tags$span(style = "color: #3aaa35;", "Tab 3")),
